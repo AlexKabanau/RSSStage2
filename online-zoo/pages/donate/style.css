@@ -1242,7 +1242,11 @@ footer .form input[type="email"]:invalid {
   .checkbox-area {
     width: 810px;
     padding-left: 14px;
-    column-gap: 112px;
+    column-gap: 128px;
+  }
+  .checkbox-area span:nth-child(1),
+  .price-list .price:nth-child(1) {
+    display: none;
   }
   .checkbox-area::after {
     bottom: 347px;
@@ -1253,7 +1257,7 @@ footer .form input[type="email"]:invalid {
     width: 830px;
     display: flex;
     justify-content: flex-start;
-    column-gap: 46px;
+    column-gap: 67px;
   }
   .PAFAF .button-container {
     margin-top: 30px;
@@ -1299,7 +1303,6 @@ footer .form input[type="email"]:invalid {
       "list . . . . ."
       "list nav nav nav copy copy";
   }
-  
   footer .footer-logo {
     margin-top: 0;
     padding-top: 39px;
@@ -1783,7 +1786,90 @@ footer .form input[type="email"]:invalid {
     margin-left: 0;
     padding-left: 17px;
 }
+
+/**/
+
 .number-form {
+  margin-top: 31px;
+  margin-left: -15px;
+}
+.checkbox {
+  margin-top: -52px;
+}
+.checkbox-name {
+  width: 300px;
+  margin-left: 0;
+}
+.checkbox-area {
+  width: 283px;
+  height: 13px;
+  padding-left:16px;
+  column-gap: 65px;
+  margin-top: 8px;
+}
+.checkbox-area span:nth-child(1),
+.checkbox-area span:nth-child(2),
+.checkbox-area span:nth-child(3),
+.price-list .price:nth-child(1),
+.price-list .price:nth-child(2),
+.price-list .price:nth-child(3) {
+  display: none;
+}
+.checkbox-area::after {
+  bottom: 259px;
+  width: 260px;
+}
+.price-list {
+  margin-left: 15px;
+  margin-top: 1px;
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 35px;
+}
+.checkbox .form-item {
+  margin-top: -24px;
+  margin-left: -16px;
+}
+.checkbox input[type="number"] {
+  width: 180px;
+  height: 42px;
+}
+.checkbox-input input + label::before {
+  width: 4px;
+  height: 4px;
+  top: 5px;
+}
+.checkbox-input input:checked + label::before {
+  position: absolute;
+  top: -3px;
+  left: -7.5px;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient( #ffee2e 2px, transparent 0, transparent 5px, #fe9013 0, #fe9013 6px, transparent 0, transparent 9px, #fe9013 0, #fe9013 20px, transparent 0);
+}
+p.price {
+  font-size: 13px;
+}
+.price object {
+  width: 5px;
+  height: 10px;
+}
+.form-item-radio {
+  margin-top: 21px;
+}
+.PAFAF .button-container {
+  margin-left: -13px;
+  margin-top: 30px;
+  margin-bottom: -15px;
+}
+.PAFAF .button-container .text-body {
+  margin-top: 29px;
+  margin-right: -0;
+}
+
+
+/* .number-form {
   margin-top: -4px;
   margin-left: 0;
 }
@@ -1791,7 +1877,6 @@ footer .form input[type="email"]:invalid {
   display: flex;
   justify-content: center;
   margin-top: -17px;
-  /* padding-top: 32px; */
   padding-left: 15px;
   position: relative;
 }
@@ -1800,7 +1885,6 @@ footer .form input[type="email"]:invalid {
   margin-left: 11px;
 }
 .section-wrapper .checkbox .text-body {
-  /* margin-top: 42px; */
   margin-left: 0;
   color: #000;
 }
@@ -1826,7 +1910,6 @@ footer .form input[type="email"]:invalid {
   width: 277px;
 }
 .checkbox-area {
-  /* width: 976px; */
   height: 14px;
 }
 .checkbox-input input + label::before {
@@ -1877,7 +1960,7 @@ p.price {
 .PAFAF .button-container .text-body {
   margin-top: 29px;
   margin-right: -0;
-}
+} */
 
 /*  */
 

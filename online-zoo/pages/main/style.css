@@ -2378,8 +2378,8 @@ footer .footer-copyright {
     /* margin-top: 70px; */
     width: 640px;
     height: 340px;
-    background-image: url('../../assets/images/Giant_Panda.jpg');
-    background-position: center -80px;
+    background-image: url('../../assets/images/Giant\ Panda_tablet.png');
+    background-position: center -34px;
   }
   .circle {
     width: 237px;
@@ -2410,7 +2410,7 @@ footer .footer-copyright {
   .backstage .wrapper {
     display: block
   }
-  
+
   .backstage img {
     display: none;
   }
@@ -2553,7 +2553,7 @@ footer .footer-copyright {
   .testimonials .button {
     margin-top: 42px;
     margin-left: 50%;
-    /* transform: translateX(-120px); */
+    transform: translateX(-120px);
   }
   .testimonials .button {
     width: 240px;
@@ -2896,6 +2896,7 @@ footer .footer-copyright {
   .testimonials .button {
     width: 240px;
     margin-left: 30px;
+    transform: none;
   }
 
 
