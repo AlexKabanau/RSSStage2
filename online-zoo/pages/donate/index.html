@@ -75,7 +75,7 @@
         <div class="nav-wrapper">
           <ul class="site-navigation-list">
             <li class="site-navigation-item">
-              <a href="#">About</a>
+              <a href="../../pages/main/index.html">About</a>
             </li>
             <li class="site-navigation-item">
               <a href="#">Map</a>
@@ -98,6 +98,23 @@
       <div class="burger">
         <span class="burger-line"></span>
       </div>
+      <nav class="burger-menu">
+        <ul class="site-navigation-burger">
+          <li class="burger-item"><a href="../main/index.html" class="header-logo-burger">
+            <object
+              type="image/svg+xml"
+              data="../../assets/images/logo-burger.svg">
+          </object>
+          </a></li>
+          <li class="burger-item"><a href="../main/index.html">About</a></li>
+          <li class="burger-item"><a href="#">Map</a></li>
+          <li class="burger-item"><a href="#">Zoos</a></li>
+          <li class="burger-item"><a href="../donate/index.html">Donate</a></li>
+          <li class="burger-item"><a href="#">Contact us</a></li>
+          <li class="burger-item"><a href="https://www.figma.com/file/jfEFwkXVj1WRq7sUHDr8os/PetStory-online" target="_blank">Designed by ©</a></li>
+        </ul>
+        <span class="burger-nav-close"></span>
+      </nav>
       <!-- <div class="burger visually-hidden"></div>
       <nav class="burger-menu visually-hidden">
         <ul class="site-navigation-burger"></ul>
@@ -144,7 +161,7 @@
         </div>
 
         <div class="checkbox">
-          <form action="#" method="post" class="number-form">
+          <form action="#" method="post" name="number-form" class="number-form">
             <p class="checkbox-name text-body">Amount</p>
             <div class="checkbox-area">
                 <span class="checkbox-input">
@@ -156,7 +173,7 @@
                     <label for="price2000"></label>
                 </span>
                 <span class="checkbox-input">
-                    <input type="radio" name="amount" value="1000" id="price1000" checked>
+                    <input type="radio" name="amount" value="1000" id="price1000">
                     <label for="price1000"></label>
                 </span>
                 <span class="checkbox-input">
@@ -168,7 +185,7 @@
                     <label for="price250"></label>
                 </span>
                 <span class="checkbox-input">
-                    <input type="radio" name="amount" value="100" id="price100">
+                    <input type="radio" name="amount" value="100" id="price100" checked>
                     <label for="price100"></label>
                 </span>
                 <span class="checkbox-input">
@@ -184,56 +201,56 @@
 
             <div class="price-list">
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 5000
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 2000
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 1000
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 500
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 250
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 100
               </p>
               <p class="price">
-                <object
+                <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
                 50
               </p>
               <p class="price">
-                  <object
+                  <object class="dollar"
                     type="image/svg+xml"
                     data="../../assets/icons/$_mobile.svg">
                   </object>
@@ -245,7 +262,7 @@
 
             <div class="form-item">
               <label for="number" class="visually-hidden">Another amount</label>
-              <input class="number" id="number" type="number" name="amount" placeholder="Another amount" maxlength="1" maxlength="4">
+              <input class="number" id="number" type="number" name="amount" placeholder="100" maxlength="1" maxlength="4">
             </div>
 
             
@@ -267,99 +284,6 @@
           </form>
       </div>
 
-        <!-- <p class="text-body">Amount</p>
-        <div class="range-controls"> -->
-          <!-- <div class="scale">
-            <div class="bar"></div>
-          </div> -->
-          <!-- <ul>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-            <li class="dot"><a href="#"></a></li>
-          </ul>
-          <div class="toggle" tabindex="0">
-            <div class="toggle-inner"></div>
-          </div>
-        </div> -->
-
-        <!-- <div class="progrss-bar">
-          <a class="button-slider"></a>
-          <a class="button-slider"></a>
-          <a class="button-slider current-button"></a>
-          <a class="button-slider"></a>
-          <a class="button-slider"></a>
-          <a class="button-slider"></a>
-          <a class="button-slider"></a>
-          <a class="button-slider"></a>
-        </div> -->
-        <!-- <div class="price-list">
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            5000
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            2000
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            1000
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            500
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            250
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            100
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            50
-          </p>
-          <p class="price">
-            <img src="../../assets/icons/$.svg" alt="$">
-            25
-          </p>
-        </div> -->
-        <!-- <form class="number-form" action="" method="post">
-          <div class="form-item">
-            <label for="number" class="visually-hidden">Another amount</label>
-            <input class="number" id="number" type="number" name="number" placeholder="Another amount" min="25" max="5000" step="25">
-          </div>
-          <div class="form-item-radio">
-
-            <input type="radio" id="period1" name="period" value="Monthly" class="visually-hidden radio">
-            <label for="period1" class="text-body">Monthly</label>
-
-            <input type="radio" id="period2" name="period" value="Once" class="visually-hidden radio" checked>
-            <label for="period2" class="text-body">Once</label>
-          </div>
-
-          <div class="button-container">
-            <button class="button button-submit-form" type="submit">Feed a friend now</button>
-            <p class="text-body">Share with your friends on social networks </p>
-          </div> -->
-
-
-
-  <!-- RADIO
-  NUMBER
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-  }-->
-        <!-- </form> -->
       </div>
 
 
@@ -457,4 +381,6 @@
           </a>
         </div>
   </footer>
+  <div class="background-black background-hidden"></div>
+  <script src="../../pages/donate/script.js"></script>
 </body>
