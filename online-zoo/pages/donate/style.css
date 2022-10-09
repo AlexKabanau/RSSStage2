@@ -355,6 +355,9 @@ a:active {
   top: 58%;
   transform: translateY(-2px);
 }
+.burger-menu {
+  display: none;
+}
 .WYFAO {
   width: 1600px;
   height: 387px;
@@ -935,7 +938,7 @@ cursor: pointer;
   border: none;
 } */
 /*!!!!!!!!!!!!!!!!!вставка!!!!!!!!!!!!!!!!!!!!*/
-.price object {
+.price .dollar {
   width: 10px;
   height: 20px;
 }
@@ -1370,6 +1373,80 @@ footer .form input[type="email"]:invalid {
     width: 55px;
     height: 37px;
   }
+  /*!!!!!!!!!!!!!!!!!бургер!!!!!!!!!!!!!*/
+  .burger-menu {
+    display: block;
+  }
+  .burger-menu {
+    width: 640px;
+    height: 329px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #fff;
+    /* box-shadow: 0px 4px 3px rgba(13, 96, 111, 0.25); */
+    /* border-radius: 10px; */
+    z-index: 10;
+    /* padding: 44px 15px 30px 44px; */
+
+    transform: translateX(100%);
+    transition: 0.2s all linear;
+  }
+  .site-navigation-burger {
+    /* display: none; */
+  
+    text-align: left;
+    margin: 10px 15px 30px 10px;
+  }
+  .site-navigation-burger .header-logo-burger object {
+    height: 42px;
+    width: 66px;
+  }
+  .site-navigation-burger .burger-item:first-child {
+    padding-bottom: 24px;
+  }
+  .site-navigation-burger .burger-item {
+    padding-bottom: 15px;
+  }.site-navigation-burger .burger-item:last-child {
+    padding-bottom: 0;
+  }
+  .site-navigation-burger a {
+    color: #000;
+  }
+  /* .burger-active {
+    width: 30px;
+    height: 30px;
+    background-image: url(../../assets/icons/clarity_window-close-line.svg);
+  } */
+  .burger-nav-close {
+    width: 14px;
+    height: 14px;
+    top: 10px;
+    right: 20px;
+    background-image: url(../../assets/icons/x_icon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    position: absolute;
+  }
+  .burger-menu-active {
+    transform: translateX(0);
+  }
+  /*!!!!!!!!!!!!!бэкграунд темный!!!!!!!!!!!!!!!!!!!!*/
+  .background-black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+  }
+  .background-hidden {
+    display: none;
+    opacity: 1;
+  }
+
+
   .WYFAO {
     /* margin-top: 70px; */
     width: 640px;
@@ -1604,6 +1681,21 @@ footer .form input[type="email"]:invalid {
     width: 55px;
     height: 37px;
   }
+
+  /*!!!!!!!!!!!!!!!бургер!!!!!!!!!!!!*/
+  .burger-menu {
+    width: 320px;
+    height: 329px;
+    
+  }
+  .site-navigation-burger {
+    /* display: none; */
+  
+    text-align: left;
+    margin: 10px 15px 30px 10px;
+  }
+
+
   .WYFAO {
     /* margin-top: 70px; */
     width: 320px;
@@ -1848,12 +1940,21 @@ footer .form input[type="email"]:invalid {
   height: 20px;
   background: radial-gradient( #ffee2e 2px, transparent 0, transparent 5px, #fe9013 0, #fe9013 6px, transparent 0, transparent 9px, #fe9013 0, #fe9013 20px, transparent 0);
 }
+.checkbox-input input:checked + .rad_rng_label .value {
+  color: #FE9013;
+}
+.price .dollar {
+  width: 5px;
+  height: 10px;
+}
 p.price {
   font-size: 13px;
 }
-.price object {
-  width: 5px;
-  height: 10px;
+p.price.checked {
+  color: #e47209;
+}
+.price.checked .dollar {
+  fill: #e47209;
 }
 .form-item-radio {
   margin-top: 21px;
