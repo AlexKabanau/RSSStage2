@@ -1,4 +1,4 @@
-console.log('проверка');
+// console.log('проверка');
 
 (function () {
 
@@ -144,7 +144,7 @@ console.log('проверка');
       let j=(i + currentItem + items.length) % items.length;
       items[j].classList.add(direction);
       items[j].addEventListener('animationend', function () {
-        console.log(i, j, 'анимация закончена, удаление классов');
+        // console.log(i, j, 'анимация закончена, удаление классов');
         this.classList.remove('active', direction);
       })
     }
@@ -158,7 +158,7 @@ console.log('проверка');
       // };
       items[j].classList.add('next', direction);
       items[j].addEventListener('animationend', function () {
-        console.log(i, j, 'анимация закончена, добавление классов');
+        // console.log(i, j, 'анимация закончена, добавление классов');
         this.classList.remove('next', direction);
         this.classList.add('active');
       })
@@ -190,4 +190,62 @@ console.log('проверка');
     }
   });
 
-} ())
+} ());
+
+(function () {/*карусель отзывов*/
+  let numberOfItems = 4;
+
+  let innerWidth = window.innerWidth;
+
+  let items = document.querySelectorAll('.feedback-wrapper');
+
+  let currentItem = 0;
+  let isEnabled = true;
+
+  let elem = document.querySelector('input[type="range"]');
+
+  if (innerWidth<=1000) {
+    numberOfItems = 3;
+  }
+
+  for (let i=0; i<numberOfItems; i++) {
+    items[i].classList.add('active');
+  }
+
+  elem.addEventListener("input", rangeValue);
+
+  function rangeValue () {
+    if (isEnabled) {
+      let newValue = Number(elem.value);
+      hideItems('to-left');
+      currentItem = newValue;
+      
+      showItems('from-right');
+    }
+  }
+
+  function hideItems (direction) {
+    isEnabled = false;
+    for (let i=0; i<numberOfItems; i++) {
+      let j=(i + currentItem + items.length) % items.length;
+      // items[j].classList.add(direction);
+      items[j].classList.remove('active', direction);
+      
+    }
+  };
+
+  function showItems (direction) {
+    for (let i=0; i<numberOfItems; i++) {
+      let j = (i + currentItem + items.length) % items.length;
+      // if (j>=numberOfItems) {
+        // items[j].style.order = String(i+numberOfItems);
+      // };
+      // items[j].classList.add('next', direction);
+      // items[j].remove('next', direction);
+      items[j].classList.add('active');
+      
+    };
+    isEnabled = true;
+  };
+
+} ());
