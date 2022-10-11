@@ -12,11 +12,14 @@ form.onchange = function () {
 
 
 form.elements.number.oninput = function () {
+  if (form.elements.number.value.length>= 5) form.elements.number.value = form.elements.number.value.slice (0,4);
   for (elem of form.elements['amount']) {
+    elem.checked = false;
     if (elem.value == form.elements.number.value) {
-      console.log('bingo');
+      // console.log('bingo');
       elem.checked = true;
-    }
+    } 
+    
   }
 };
 

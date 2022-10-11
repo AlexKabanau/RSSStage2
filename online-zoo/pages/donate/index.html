@@ -262,7 +262,7 @@
 
             <div class="form-item">
               <label for="number" class="visually-hidden">Another amount</label>
-              <input class="number" id="number" type="number" name="amount" placeholder="100" maxlength="1" maxlength="4">
+              <input class="number" id="number" type="number" name="amount" placeholder="100" minlength="1" maxlength="4" oninput="if (value.length>= 5) value = value.slice (0,4)" value="100">
             </div>
 
             
