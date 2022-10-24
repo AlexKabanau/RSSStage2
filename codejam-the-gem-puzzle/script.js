@@ -354,7 +354,7 @@ function shuffleArray(arr) {
 
 function validArray(arr) {
   let matrix = getMatrix(arr);
-  // console.log(matrix);
+  console.log(matrix);
   let ki = 0;
   let row;
   let sum;
@@ -374,7 +374,7 @@ function validArray(arr) {
       // }
     }
   }
-  // console.log('ki '+ki);
+  console.log('ki '+ki);
   for (let i = 0; i<matrix.length; i++) {
     for (let j=0; j<matrix[i].length; j++) {
       if (matrix[i][j] == arr.length) {
@@ -390,9 +390,9 @@ function validArray(arr) {
   //     row = Math.floor(i / Math.sqrt(arr.length)) + 1;
   //   }
   // }
-  // console.log('row '+row);
-  // console.log(ki+row);
-  // console.log((ki+row)%2, ((ki+row)%2 == 1));
+  console.log('row '+row);
+  console.log(ki+row);
+  console.log((ki+row)%2, ((ki+row)%2 == 1));
   if ((ki+row)%2 == 1) {
     return false
   } else {
@@ -431,6 +431,7 @@ function swap(coords1, coords2, matrix) {
 
   if (isWon(matrix)) {
     addWonClass();
+    // shuffle();
   }
 }
 
@@ -484,6 +485,7 @@ function addWonClass () {
         // burger_menu.classList.remove('burger-menu-active');
         backgroundBlack.classList.add('background-hidden');
         modal.classList.remove('modal-show');
+        shuffle();
         /*закрытие попап*/
     }
 }
