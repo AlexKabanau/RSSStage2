@@ -230,7 +230,7 @@ gameField.addEventListener('click', (event) => {
 // gameField.addEventListener('mousedown', function(event) { // (1) отследить нажатие
 //   console.log(event);
 //   const elButton = event.target.closest('button');
-//   console.log(elButton);
+//   console.dir(elButton);
 //   if (!elButton) return;
 
 //   event.preventDefault();
@@ -253,8 +253,10 @@ gameField.addEventListener('click', (event) => {
 
 //   // (2) подготовить к перемещению:
 //   // разместить поверх остального содержимого и в абсолютных координатах
-//   let shiftX = event.clientX - elButton.getBoundingClientRect().left;
-//   let shiftY = event.clientY - elButton.getBoundingClientRect().top;
+//   let shiftX = event.clientX - elButton.getBoundingClientRect().left - gameField.pageX;
+  
+//   let shiftY = event.clientY - elButton.getBoundingClientRect().top - gameField.pageX;
+//   console.log(shiftX, shiftY);
 
 
 //   elButton.style.position = 'absolute';
@@ -268,6 +270,9 @@ gameField.addEventListener('click', (event) => {
 //   // передвинуть мяч под координаты курсора
 //   // и сдвинуть на половину ширины/высоты для центрирования
 //   function moveAt(pageX, pageY) {
+//     console.log(pageX, pageY)
+//     // const shift= 100;/*100% от ширины/высоты*/
+//     elButton.style.transform = `translate3D(0, 0, 0)`
 //     elButton.style.left = pageX - shiftX + 'px';
 //     elButton.style.top = pageY - shiftY + 'px';
 
@@ -355,7 +360,9 @@ function validArray(arr) {
   let sum;
   for (let i = 0; i<matrix.length; i++) {
     for (let j=0; j<matrix[i].length; j++) {
-      if (matrix[i][j] == arr.length || matrix[i][j+1] == arr.length) {
+      if (matrix[i][j] == arr.length) {
+        continue
+      } else if (matrix[i][j+1] == arr.length) {
         if ((matrix[i][j+2] < matrix[i][j])) {
           ki++
         }
@@ -385,8 +392,8 @@ function validArray(arr) {
   // }
   // console.log('row '+row);
   // console.log(ki+row);
-  // console.log((ki+row)%2);
-  if ((ki+row)%2) {
+  // console.log((ki+row)%2, ((ki+row)%2 == 1));
+  if ((ki+row)%2 == 1) {
     return false
   } else {
     return true
@@ -489,9 +496,10 @@ function setTimer() {
   // let spendTime = document.getElementById("spendTime");
   let seconds = 0;
   let minutes = 0;
-  let timer;
+  let timer = null;
   clearTimeout(timer);
-  timeEl.innerHTML = `00 : 00 have passed`
+  // timeEl.innerHTML = ``;
+  timeEl.innerHTML = `00 : 00 have passed`;
   function updateSeconds() {
     seconds += 1;
     if (seconds > 59) {
@@ -502,6 +510,7 @@ function setTimer() {
     timeEl.innerHTML = `${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')} have passed`;
     setTimeout(updateSeconds, 1000);
   }
+  // updateSeconds();
 
   timer = setTimeout(updateSeconds, 1000);
 };
