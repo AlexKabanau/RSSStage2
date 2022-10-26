@@ -352,51 +352,85 @@ function shuffleArray(arr) {
       .map(({ value }) => value);
 };
 
-function validArray(arr) {
-  let matrix = getMatrix(arr);
-  console.log(matrix);
-  let ki = 0;
-  let row;
-  let sum;
-  for (let i = 0; i<matrix.length; i++) {
-    for (let j=0; j<matrix[i].length; j++) {
-      if (matrix[i][j] == arr.length) {
-        continue
-      } else if (matrix[i][j+1] == arr.length) {
-        if ((matrix[i][j+2] < matrix[i][j])) {
-          ki++
-        }
-      } else if ((matrix[i][j+1] < matrix[i][j])) {
-        ki++
-      }
-      // if ((matrix[i][j+1] < matrix[i][j])) {
-      //   ki++
-      // }
-    }
-  }
-  console.log('ki '+ki);
-  for (let i = 0; i<matrix.length; i++) {
-    for (let j=0; j<matrix[i].length; j++) {
-      if (matrix[i][j] == arr.length) {
-        row = i+1;
-      }
-    }
-  }
-  // for (let i = 0; i<arr.length; i++) {
-  //   console.log(arr[i]);
-  //   console.log(arr[arr.length-1]);
+// function validArray(arr) {
+//   let matrix = getMatrix(arr);
+//   console.log(matrix);
+//   let ki = 0;
+//   let row;
+//   let sum;
+//   for (let i = 0; i<matrix.length; i++) {
+//     for (let j=0; j<matrix[i].length; j++) {
+//       if (matrix[i][j] == arr.length) {
+//         continue
+//       } else if (matrix[i][j+1] == arr.length) {
+//         if ((matrix[i][j+2] < matrix[i][j])) {
+//           ki++
+//         }
+//       } else if ((matrix[i][j+1] < matrix[i][j])) {
+//         ki++
+//       }
+//       // if ((matrix[i][j+1] < matrix[i][j])) {
+//       //   ki++
+//       // }
+//     }
+//   }
+//   console.log('ki '+ki);
+//   for (let i = 0; i<matrix.length; i++) {
+//     for (let j=0; j<matrix[i].length; j++) {
+//       if (matrix[i][j] == arr.length) {
+//         row = i+1;
+//       }
+//     }
+//   }
+//   // for (let i = 0; i<arr.length; i++) {
+//   //   console.log(arr[i]);
+//   //   console.log(arr[arr.length-1]);
 
-  //   if (arr[i] == arr.length) {
-  //     row = Math.floor(i / Math.sqrt(arr.length)) + 1;
-  //   }
-  // }
-  console.log('row '+row);
-  console.log(ki+row);
-  console.log((ki+row)%2, ((ki+row)%2 == 1));
-  if ((ki+row)%2 == 1) {
-    return false
-  } else {
+//   //   if (arr[i] == arr.length) {
+//   //     row = Math.floor(i / Math.sqrt(arr.length)) + 1;
+//   //   }
+//   // }
+//   console.log('row '+row);
+//   console.log(ki+row);
+//   console.log((ki+row)%2, ((ki+row)%2 == 1));
+//   if ((ki+row)%2 == 1) {
+//     return false
+//   } else {
+//     return true
+//   }
+// }
+function validArray(arr) {
+  gridNumber;
+  let matrix = getMatrix(arr);
+  let blanckNumber;
+  let InversionCount = 0;
+  for (let i = 0; i<matrix.length; i++) {
+    for (let j=0; j<matrix[i].length; j++) {
+      if (matrix[i][j] == arr.length) {
+        blanckNumber = matrix.length - i;
+      }
+    }
+  }
+  for (let i=0; i<arr.length; i++) {
+    if (arr[i] == arr.length) {
+      continue
+    };
+    for (let j=i+1; j<arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        InversionCount++;
+      }
+    }
+  }
+  console.log(arr);
+  console.log(gridNumber, blanckNumber, InversionCount);
+  if ((gridNumber%2 == 1) && (InversionCount%2 == 0)) {
+    return true;
+  } else if ((gridNumber%2 == 0) && (blanckNumber%2 == 0) && (InversionCount%2 == 1)) {
     return true
+  } else if ((gridNumber%2 == 0) && (blanckNumber%2 == 1) && (InversionCount%2 == 0)) {
+    return true
+  } else {
+    return false
   }
 }
 
