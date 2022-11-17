@@ -1,0 +1,17 @@
+// .footer {
+//   border: 2px solid $color-border;
+//   border-radius: 10px;
+//   padding: 0;
+// }
+.copyright {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.copyright__info__link:hover {
+  color: $color-hovered-link;
+}

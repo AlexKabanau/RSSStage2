@@ -1,0 +1,130 @@
+.current__wrapper {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  .audio-player {
+    width: 90%;
+    padding: 35px 20px;
+    // margin: auto;
+    margin-top: 20px;
+    border: 2px solid $color-border;
+    border-radius: 10px;
+  
+    .player-controls {
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  
+    .playAudio {
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+      border: none;
+      width: 30px;
+      height: 30px;
+      background: url('https://img.icons8.com/play') no-repeat center;
+      background-size: contain;
+  
+    }
+    .pause {
+      background: url('https://img.icons8.com/pause') no-repeat center;
+      background-size: contain;
+    }
+  
+    p {
+      margin: 0 0 0 5px;
+      line-height: 1;
+      display: inline-flex;
+  
+      small {
+        font-size: 10px;
+      }
+    }
+  
+    .seekObjContainer {
+      position: relative;
+      width: 70%;
+      margin: 0 5px;
+      height: 5px;
+  
+      .seekObj {
+        position: relative;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        background-color: $color-light;
+        // background-color: $color-light;
+        border: 1px solid $color-border;
+  
+        .percentage {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          background-color: $color-brand;
+        }
+      }
+    }
+  }
+}
+.volume-container {
+  cursor: pointer;
+  .volume-button {
+    // height: 26px;
+    display: flex;
+    align-items: center;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    width: 25px;
+    height: 25px;
+    background: url('https://img.icons8.com/ios/50/null/high-volume--v1.png') no-repeat center;
+    background-size: contain;
+    .volume {
+      transform: scale(0.7);
+    }
+  }
+  // width: 100px;
+  // margin: auto;
+  position: relative;
+  z-index: 2;
+  .volume-slider {
+    position: absolute;
+    left: -3px; 
+    top: 20px;
+    z-index: -1;
+    width: 0;
+    height: 5px;
+    background-color: $color-light;
+    // border: 1px solid $color-border;
+    // background: $color-ligth;
+    // box-shadow: 0 0 20px #000a;
+    @extend %transition;
+    .volume-percentage {
+      background: $color-brand;
+      height: 100%;
+      width: 75%;
+    }
+  }
+  &:hover {
+    .volume-slider {
+      left: -103px;
+      width: 100px;
+    }
+  }
+}
+.current__image {
+  border-radius: 5px;
+  width: 40%;
+}
+

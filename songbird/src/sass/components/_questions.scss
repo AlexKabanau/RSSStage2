@@ -1,0 +1,34 @@
+.questions {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2.8rem;
+}
+.questions__navigation {
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.questions__wrapper {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+}
+.questions .navigation__item {
+  padding: 0 10px;
+  cursor: context-menu;
+
+  &_active {
+    color: $color-active-link;
+    text-decoration: underline;
+  }
+}
+
+// .navigation__link {
+//   @extend %transition;
+//   &:hover {
+//     color: $color-hovered-link;
+//   }
+// }

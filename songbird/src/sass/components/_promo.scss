@@ -1,0 +1,60 @@
+.promo {
+  // border: 2px solid $color-border;
+  // border-radius: 10px;
+  // padding: 20px 0;
+  // box-sizing: content-box;
+  text-align: center;
+}
+
+.promo__wrapper {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.promo__button {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  &:hover &__text {
+    color: $color-hovered-link;
+  }
+  &:hover &__svg path {
+    fill: $color-hovered-link;
+  }
+  @include media-mobile {
+    top: 60%;
+  }
+}
+.promo__button__svg {
+  width: 100px;
+  height: 100px;
+  @include media-laptop {
+    width: 70px;
+    height: 70px;
+  }
+  @include media-mobile {
+    width: 50px;
+    height: 50px;
+  }
+}
+.promo__button__text {
+  font-size: 5.0rem;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  color: $color-light;
+  @extend %transition;
+  @include media-laptop {
+    font-size: 2.5rem;
+  }
+  @include media-mobile {
+    display: none;
+  }
+}
+.promo__video {
+  width: 70%;
+}

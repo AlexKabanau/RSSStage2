@@ -1,0 +1,27 @@
+.button {
+  font-family: 'Open Sans', Verdana, sans-serif;
+  padding: 11px 25px 13px;
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 2.2rem;
+  border-radius: 4px;
+  @extend %transition;
+  &_borderred {
+    background-color: $color-light;
+    border: 1px solid $color-border;
+    color: $color-darck;
+    &:hover {
+      background-color: $color-hovered;
+      border-color: $color-hovered;
+    }
+  }
+  &_colored {
+    background-color: $color-brand;
+    color: $color-darck;
+    border: 1px solid $color-brand;
+    &:hover {
+      background-color: $color-active;
+      border-color: $color-active;
+    }
+  }
+}

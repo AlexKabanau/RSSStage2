@@ -1,0 +1,24 @@
+.header__logo {
+  background-image: url('https://birds-quiz.netlify.app/static/media/logo.4f82cd73.svg');
+  width: 200px;
+  height: 55px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  @extend %transition;
+  &:hover {
+    opacity: 1;
+  }
+  @include media-tablet {
+    width: 150px;
+    height: calc(150px/(200/55));
+  }
+  @include media-mobile {
+    width: 100px;
+    height: calc(100px/(200/55));
+  }
+}
+
+.copyright__logo__svg {
+  height: 50px !important;
+}

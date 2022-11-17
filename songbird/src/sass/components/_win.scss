@@ -1,0 +1,31 @@
+.win__wrapper {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & h3 {
+    @include media-tablet {
+      @include font(2.2rem, 3.0rem);
+    }
+    @include media-mobile {
+      @include font(2.0rem, 2.4rem);
+    }
+  }
+}
+.score__text {
+  font-weight: bold;
+  color: $color-correct;
+}
+.max-score__text {
+  color: $color-active-link;
+}
+.section__title {
+  @include media-tablet {
+    @include font(2.4rem, 3.4rem);
+  }
+}

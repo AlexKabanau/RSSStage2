@@ -1,0 +1,21 @@
+.navigation {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 2.8rem;
+}
+.navigation__item {
+  padding: 0 10px;
+  cursor: pointer;
+  &_active .navigation__link{
+    color: $color-active-link;
+    text-decoration: underline;
+  }
+}
+
+.navigation__link {
+  @extend %transition;
+  &:hover {
+    color: $color-hovered-link;
+  }
+}

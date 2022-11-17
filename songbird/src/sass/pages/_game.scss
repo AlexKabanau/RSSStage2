@@ -1,0 +1,48 @@
+.game {
+  display: grid;
+  grid-template-rows: auto repeat(4, 1fr) auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  grid-template-areas: 
+  "questions questions"
+  "current answers"
+  "current answers"
+  "current description"
+  "current description"
+  "next next";
+  width: 100%;
+  
+  @include media-tablet {
+    grid-template-areas: 
+    "questions questions"
+    "current current"
+    "current current"
+    "answers description"
+    "answers description"
+    "next next";
+  }
+  @include media-mobile {
+    grid-template-rows: auto 1fr 1fr auto auto auto;
+    grid-template-areas: 
+    "questions questions"
+    "current current"
+    "answers answers"
+    "description description"
+    "next next";
+  }
+}
+.questions {
+  grid-area: questions;
+}
+.current {
+  grid-area: current;
+}
+.answers {
+  grid-area: answers;
+}
+.description {
+  grid-area: description;
+}
+.next {
+  grid-area: next;
+}

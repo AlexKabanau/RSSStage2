@@ -1,0 +1,40 @@
+//constants
+@import "abstract/constatnts";
+
+//fonts
+@import "fonts/fonts";
+
+//abstract
+@import "abstract/mixins";
+@import "abstract/placeholders";
+
+//base
+@import "base/normalize";
+@import "base/base";
+@import "base/buttons";
+@import "base/logo";
+
+//pages
+@import "pages/game";
+@import "pages/win-game";
+
+
+//layouts
+@import "layouts/body";
+@import "layouts/wrapper";
+@import "layouts/header";
+@import "layouts/footer";
+
+
+
+//componets
+@import "components/promo";
+@import "components/navigation";
+@import "components/questions";
+@import "components/answers";
+@import "components/current";
+@import "components/description";
+@import "components/next";
+@import "components/win";
+@import "components/new-game";
+

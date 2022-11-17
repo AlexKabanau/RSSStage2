@@ -1,0 +1,30 @@
+.description__wrapper {
+  border: 2px solid $color-border;
+  border-radius: 10px;
+  padding: 15px 10px 17px 10px;
+  box-sizing: border-box;
+  height: 100%;
+}
+.description__container {
+  display: flex;
+  flex-direction: column;
+}
+.description {
+  .audio-player {
+  align-self: center;
+  }
+}
+.description__image {
+  width: 30%;
+  border-radius: 5px;
+}
+.description__title {
+  margin: 0;
+  // padding-top: 1rem;
+  @include media-tablet {
+    @include font(2.2rem, 3.0rem);
+  }
+}
+.description__subtitle {
+  margin: 0;
+}

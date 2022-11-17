@@ -1,0 +1,29 @@
+.win-game {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  // grid-template-areas: 
+  // "questions questions"
+  // "current answers"
+  // "current answers"
+  // "current description"
+  // "current description"
+  // "next next";
+  width: 100%;
+}
+// .questions {
+//   grid-area: questions;
+// }
+// .current {
+//   grid-area: current;
+// }
+// .answers {
+//   grid-area: answers;
+// }
+// .description {
+//   grid-area: description;
+// }
+// .next {
+//   grid-area: next;
+// }
