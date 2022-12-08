@@ -1,4 +1,4 @@
-export interface INewsInterface {
+interface INewsElement {
     source: {
         name: string;
         id: string;
@@ -11,8 +11,9 @@ export interface INewsInterface {
     description: string;
     url: string;
 }
-export interface INewsData {
+interface INewsData {
     status: string;
     totalResults?: number;
-    articles?: Array<INewsInterface>;
+    articles?: Array<INewsElement>;
 }
+export { INewsElement, INewsData };
