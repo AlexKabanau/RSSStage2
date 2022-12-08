@@ -1,3 +1,7 @@
+.news {
+    height: 86vh;
+    overflow: auto;
+}
 .news__item {
     display: flex;
     flex-direction: column;

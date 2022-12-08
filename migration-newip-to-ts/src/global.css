@@ -12,6 +12,10 @@ header h1 {
     font-size: 40px;
     font-weight: 800;
 }
+main {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
 
 footer {
     height: 100px;
