@@ -16,4 +16,8 @@ interface INewsData {
     totalResults?: number;
     articles?: Array<INewsElement>;
 }
-export { INewsElement, INewsData };
+interface ISourcesData {
+    id: string;
+    name: string;
+}
+export { INewsElement, INewsData, ISourcesData };
