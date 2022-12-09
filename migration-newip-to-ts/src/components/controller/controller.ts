@@ -1,5 +1,5 @@
 import AppLoader from './appLoader';
-import { CallBackType } from '../../types/index'
+import { CallBackType } from '../../types/index';
 
 class AppController extends AppLoader {
     getSources<T>(callback: CallBackType<T>) {
@@ -32,7 +32,7 @@ class AppController extends AppLoader {
                         );
                     }
                 }
-                
+
                 return;
             }
             target = target.parentNode as HTMLElement;

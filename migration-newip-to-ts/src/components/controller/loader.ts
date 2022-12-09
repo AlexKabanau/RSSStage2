@@ -1,11 +1,11 @@
-import { CallBackType } from '../../types/index'
+import { CallBackType } from '../../types/index';
 // type CallBackType<T> = (data: T) => void;
 class Loader {
     baseLink: string;
     options: {
         apiKey: string;
-    }
-    constructor(baseLink: string, options: {apiKey: string}) {
+    };
+    constructor(baseLink: string, options: { apiKey: string }) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -29,8 +29,8 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: {[key: string]: string}, endpoint: string) {
-        const urlOptions = { ...this.options, ...options } as {[key: string]: string};
+    makeUrl(options: { [key: string]: string }, endpoint: string) {
+        const urlOptions = { ...this.options, ...options } as { [key: string]: string };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {

@@ -21,7 +21,7 @@
             "error",
             {
             "endOfLine": "auto"
-            },
+            }
         ],
         "@typescript-eslint/no-explicit-any": 2,
         "no-debugger": "off",
