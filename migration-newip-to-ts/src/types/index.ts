@@ -20,4 +20,5 @@ interface ISourcesData {
     id: string;
     name: string;
 }
-export { INewsElement, INewsData, ISourcesData };
+type CallBackType<T> = (data: T) => void;
+export { INewsElement, INewsData, ISourcesData, CallBackType };

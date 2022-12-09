@@ -1,4 +1,5 @@
-type CallBackType<T> = (data: T) => void;
+import { CallBackType } from '../../types/index'
+// type CallBackType<T> = (data: T) => void;
 class Loader {
     baseLink: string;
     options: {
