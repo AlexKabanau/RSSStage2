@@ -8,6 +8,13 @@
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
 }
+@media (max-width: 768px) {
+    .sources {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 150px;
+    }
+}
 
 .source__item {
     background: none;

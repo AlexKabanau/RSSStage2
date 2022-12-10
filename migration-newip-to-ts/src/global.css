@@ -16,6 +16,11 @@ main {
     display: grid;
     grid-template-columns: auto 1fr;
 }
+@media (max-width: 768px) {
+    main {
+        display: block;
+    }
+}
 
 footer {
     height: 100px;
