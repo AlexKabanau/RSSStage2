@@ -39,7 +39,7 @@ class Loader {
 
         return url.slice(0, -1);
     }
-
+    // enum???
     private load<T>(method: string, endpoint: string, callback: CallBackType<T>, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)

@@ -12,7 +12,7 @@ class App {
     }
 
     start(): void {
-        const tempSources = document.querySelector('.sources') as HTMLElement;
+        const tempSources = document.querySelector('.sources') as HTMLDivElement;
         tempSources.addEventListener('click', (e: Event) =>
             this.controller.getNews(e, (data: INewsData) => this.view.drawNews(data))
         );
