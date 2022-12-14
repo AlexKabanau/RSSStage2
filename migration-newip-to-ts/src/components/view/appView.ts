@@ -10,7 +10,7 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: INewsData) {
+    drawNews(data: INewsData): void {
         const values: Array<INewsElement> = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
