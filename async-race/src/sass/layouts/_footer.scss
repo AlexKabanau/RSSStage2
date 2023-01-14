@@ -15,14 +15,14 @@
   justify-content: space-evenly;
 }
 .rss-logo {
-  // background-image: url(../img/rs_school_js.svg);
+  background-image: url(../img/rs_school_js.svg);
   background-size: contain;
   background-repeat: no-repeat; 
   width: 150px;
   height: 35px;
 }
 .rss-logo:hover {
-  // background-image: url(../img/rss-hover.svg);
+  background-image: url(../img/rss-hover.svg);
 }
 .year-wrap {
   color: $basic-white;

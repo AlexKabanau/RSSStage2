@@ -31,15 +31,8 @@ class Header extends Component {
     this.container.append(pageButtons);
   }
 
-  afterRender() {
-
-  }
-
   render(): HTMLElement {
     this.renderPageButtons();
-    setTimeout(() => {
-      this.afterRender();
-    }, 0);
     return this.container;
   }
 }
