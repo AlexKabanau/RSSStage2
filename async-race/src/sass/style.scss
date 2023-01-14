@@ -1,0 +1,30 @@
+//constants
+@import "abstract/constatnts";
+
+//fonts
+@import "fonts/fonts";
+
+//abstract
+@import "abstract/mixins";
+@import "abstract/placeholders";
+
+//base
+@import "base/normalize";
+@import "base/base";
+@import "base/buttons";
+
+//layouts
+@import "layouts/body";
+@import "layouts/wrapper";
+@import "layouts/header";
+@import "layouts/catalog";
+@import "layouts/footer";
+@import "layouts/product-page";
+@import "layouts/popupMaxGoods";
+@import "layouts/cart-page";
+@import "layouts/error-page";
+
+//componets
+@import "components/product-cards";
+@import "components/modal";
+@import "components/dual-range-slider";

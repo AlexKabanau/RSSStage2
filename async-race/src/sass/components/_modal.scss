@@ -1,0 +1,188 @@
+.modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+  background-color: $basic-white;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+}
+.modal-show {
+  display: block;
+  animation: bounce 0.6s;
+}
+.modal-error {
+  animation: shake 0.6s;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 11px;
+  width: 21px;
+  height: 21px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-close::before,
+.modal-close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 2px;
+  width: 19px;
+  height: 3px;
+  background-color: $basic-red;
+}
+
+.modal-close::before {
+  transform: rotate(45deg);
+}
+
+.modal-close::after {
+  transform: rotate(-45deg);
+}
+
+.modal-payment {
+  position: fixed;
+  width: 620px;
+  height: 568px;
+  border-top: 7px solid $basic-red;
+  // display: none;
+  // display: block;
+}
+
+.modal-payment .container {
+  width: 460px;
+}
+
+.modal-payment input {
+  font-family: PT Sans, "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+  padding: 7px 12px;
+  border: 2px solid $basic-greylight;
+  border-radius: 2px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 11px;
+}
+
+.modal-payment label {
+  @extend %font-add;
+  @include font(1.8rem, 2.4rem);
+  margin-bottom: 11px;
+}
+
+.modal-payment .button {
+  border: none;
+  vertical-align: top;
+  padding: 0;
+  padding-top: 11px;
+  padding-bottom: 9px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.payment-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 13px;
+  margin-top: 15px;
+  margin-bottom: 37px;
+}
+
+.payment-letter {
+  grid-column: 1 / -1;
+}
+
+.payment-card-info {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 13px;
+  &_title {
+    @extend %font-add;
+    @include font(1.8rem, 2.4rem);
+    margin: 0;
+  }
+
+}
+
+
+.payment-card-number {
+  grid-column: 1 / -1;
+}
+
+.card-logo {
+  display: block;
+  height: 43px;
+  width: 72px;
+  // background: no-repeat center/100% url('../img/2443.jpg');
+  // background-image: url("../img/icon-cart.svg");
+  &.american {
+    // background-image: url('../img/American_Express-Logo.wine.jpg');
+  }
+  &.visa {
+    // background-image: url('../img/640px-Visa_2022.svg.jpg');
+  }
+  &.mastercart {
+    // background-image: url('../img/1280pxmastercard2019logo.svg_1.jpg');
+  }
+  &.unionpay {
+    // background-image: url('../img/UnionPay_logo.svg_1.jpg');
+  }
+}
+
+
+.modal-wrapper {
+  background-color: #F4F4F4;
+  padding: 37px 0;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -50%) translateY(-1000px);
+  }
+
+  70% {
+    transform: translate(-50%, -50%) translateY(30px);
+  }
+
+  90% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(-50%, -50%) translateX(10px);
+  }
+}

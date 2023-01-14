@@ -1,0 +1,26 @@
+.button {
+  @extend %font-add;
+  @include font(1.4rem, 1.8rem);
+  background-color: $basic-red;
+  text-transform: uppercase;
+  display: block;
+  width: 192px;
+  height: 38px;
+  box-sizing: border-box;
+  padding-top: 11px;
+  padding-bottom: 9px;
+  text-align: center;
+  color: $basic-white;
+  border: none;
+  cursor: pointer;
+  @extend %transition;
+  &:hover {
+    background: #CA2C37;
+  }
+  &:focus {
+    background: #CA2C37;
+  }
+  &:active {
+    background: #BA2732;
+  }
+}

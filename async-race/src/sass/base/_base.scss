@@ -1,0 +1,56 @@
+html {
+  height: 100%;
+  font-size: 10px;
+}
+body {
+  font-size: 1.6rem;
+  font-family: "PT Sans", "Arial", sans-serif;
+  font-size: 1.3rem;
+  line-height: 2.4rem;
+  color: $basic-black;
+  background-color: $basic-white;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  align-content: start;
+}
+h1 {
+  @extend %font-add;
+  @include font(4.4rem, 5.4rem);
+}
+h2 {
+  @extend %font-add;
+  @include font(3.0rem, 3.0rem, $weight: 400);
+}
+a {
+  text-decoration: none;
+  color: $basic-white;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+.container {
+  width: 940px;
+  margin: 0 auto;
+}
