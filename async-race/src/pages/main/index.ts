@@ -1,20 +1,43 @@
 import Page from '../../core/templates/page';
 import Footer from '../../core/components/footer';
 import Form from './form';
+import Garage from './garage';
+import ProductItemData from '../../core/types';
 
 class MainPage extends Page {
   form: Form;
 
   footer: Footer;
 
+  garage: Garage;
+
   static TextObject = {
     MainTitle: 'Main Page',
   };
 
+  getData() {
+    const baseUrl = 'http://127.0.0.1:3000';
+
+    const path = {
+      garage: '/garage',
+      winners: '/winners',
+    };
+
+    const getGarage = async () => {
+      const response = await fetch(`${baseUrl}${path.garage}`);
+      const data: Array<ProductItemData> = await response.json();
+
+      return data;
+    };
+    return getGarage;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(id: string) {
     super(id);
+    const data = this.getData();
     this.form = new Form('section', 'cars-form');
+    this.garage = new Garage('section', 'garage-section', data);
     this.footer = new Footer('footer', 'footer');
   }
 
@@ -49,6 +72,7 @@ class MainPage extends Page {
     this.container.append(button);
 
     this.container.append(this.form.render());
+    this.container.append(this.garage.render());
 
     this.container.append(this.footer.render());
   }

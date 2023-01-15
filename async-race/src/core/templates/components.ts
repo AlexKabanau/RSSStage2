@@ -1,12 +1,16 @@
+import ProductItemData from '../types';
+
 abstract class Component {
   protected container: HTMLElement;
 
-  constructor(tagName: string, className: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(tagName: string, className: string, _data?: Promise<ProductItemData[]>) {
     this.container = document.createElement(tagName);
     this.container.className = className;
   }
 
-  render() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  render(_data?: Promise<ProductItemData[]>) {
     return this.container;
   }
 }
