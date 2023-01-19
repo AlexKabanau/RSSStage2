@@ -79,7 +79,7 @@ const getRandomColor = () => {
   return color;
 };
 
-export const generateRandomCars = (count = 100) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  new Array(count).fill(1).map((el) => ({ name: getRandomName(), color: getRandomColor() }));
-};
+export const generateRandomCars = (count = 100) =>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, implicit-arrow-linebreak
+  new Array(count).fill(1).map((el) => ({ name: getRandomName(), color: getRandomColor() }))
+;

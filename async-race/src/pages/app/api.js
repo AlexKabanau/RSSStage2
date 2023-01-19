@@ -59,10 +59,11 @@ const getSortOrder = (sort, order) => {
 };
 
 export const getWinners = async ({
-  page = 1, limit = 10, sort, order,
+  page, limit = 10, sort, order,
 }) => {
   const response = await fetch(`${winners}?_page=${page}&limit=${limit}${getSortOrder(sort, order)}`);
   const items = await response.json();
+  console.log(items);
 
   return {
     // eslint-disable-next-line max-len

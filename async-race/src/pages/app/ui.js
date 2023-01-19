@@ -133,14 +133,15 @@ export const updateStateGarage = async () => {
   store.carsCount = count;
 
   if (store.carsPage * MAX_CARS_PER_PAGE < Number(store.carsCount)) {
+    // console.log(store.carsPage);
     ((document.getElementById('next'))).disabled = false;
   } else {
-    document.getElementById('next').disabled = false;
+    document.getElementById('next').disabled = true;
   }
   if (store.carsPage > 1) {
     ((document.getElementById('prev'))).disabled = false;
   } else {
-    ((document.getElementById('prev'))).disabled = false;
+    ((document.getElementById('prev'))).disabled = true;
   }
 };
 
@@ -151,16 +152,18 @@ export const updateStateWinners = async () => {
   const { items, count } = await getWinners({ page: store.winnersPage, sort: store.sortBy, order: store.sortOrder });
   store.winners = items;
   store.winnersCount = count;
+  console.log(store.winnersPage);
+  console.log(store.winnersCount);
 
   if (store.winnersPage * MAX_ITEM_PER_PAGE < Number(store.winnersCount)) {
     ((document.getElementById('next'))).disabled = false;
   } else {
-    ((document.getElementById('next'))).disabled = false;
+    ((document.getElementById('next'))).disabled = true;
   }
   if (store.winnersPage > 1) {
     ((document.getElementById('prev'))).disabled = false;
   } else {
-    ((document.getElementById('prev'))).disabled = false;
+    ((document.getElementById('prev'))).disabled = true;
   }
 };
 
@@ -251,6 +254,7 @@ export const listen = () => {
     if (target.classList.contains('generator-button')) {
       (target).disabled = true;
       const cars = generateRandomCars();
+      console.log(cars);
       await Promise.all(cars.map((c) => createCar(c)));
       await updateStateGarage();
       (document.getElementById('garage')).innerHTML = renderGarage();
@@ -286,14 +290,15 @@ export const listen = () => {
         }
         case 'winner': {
           store.winnersPage -= 1;
-          await updateStateWinners;
-          (document.getElementById('winner-view')).innerHTML = renderWinners();
+          await updateStateWinners();
+          (document.getElementById('winners-view')).innerHTML = renderWinners();
           break;
         }
       }
     }
 
     if (target.classList.contains('next-button')) {
+      console.log(store.view);
       // eslint-disable-next-line default-case
       switch (store.view) {
         case 'garage': {
@@ -304,8 +309,8 @@ export const listen = () => {
         }
         case 'winner': {
           store.winnersPage += 1;
-          await updateStateWinners;
-          (document.getElementById('winner-view')).innerHTML = renderWinners();
+          await updateStateWinners();
+          (document.getElementById('winners-view')).innerHTML = renderWinners();
           break;
         }
       }
@@ -313,22 +318,28 @@ export const listen = () => {
 
     if (target.classList.contains('garage-menu-button')) {
       (document.getElementById('garage-view')).style.display = 'block';
+      store.view = 'garage';
       (document.getElementById('winners-view')).style.display = 'none';
     }
 
     if (target.classList.contains('winners-menu-button')) {
       (document.getElementById('garage-view')).style.display = 'none';
       (document.getElementById('winners-view')).style.display = 'block';
+      store.view = 'winner';
       await updateStateWinners();
       (document.getElementById('winners-view')).innerHTML = renderWinners();
     }
 
     if (target.classList.contains('table-wins')) {
       setSortOrder('wins');
+      await updateStateWinners();
+      (document.getElementById('winners-view')).innerHTML = renderWinners();
     }
 
     if (target.classList.contains('table-time')) {
       setSortOrder('time');
+      await updateStateWinners();
+      (document.getElementById('winners-view')).innerHTML = renderWinners();
     }
   });
 
