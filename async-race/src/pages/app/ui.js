@@ -1,28 +1,29 @@
 import {
-  getCar, getCars, createCar, deleteCar, updateCar, startEngine, stopEngine, saveWinner, getWinner, deleteWinner, drive, getWinners,
+  // eslint-disable-next-line max-len
+  getCar, getCars, createCar, deleteCar, updateCar, startEngine, stopEngine, saveWinner, getWinners, deleteWinner, drive,
 } from './api';
 import store from './store';
 import {
   animation, getDistanceBetweenElements, race, generateRandomCars,
 } from './utils';
-import { CarInfo } from '../../core/types/index';
+// import { CarInfo } from '../../core/types/index';
 
-const selectedCar = null;
+let selectedCar = null;
 
-const getCarImage = (color: string) => `
+const getCarImage = (color) => `
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
 
   <defs>
   </defs>
   <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-    <path d="M 75.479 36.045 l -7.987 -1.22 l -2.35 -2.574 c -5.599 -6.132 -13.571 -9.649 -21.874 -9.649 h -6.245 c -1.357 0 -2.696 0.107 -4.016 0.296 c -0.022 0.004 -0.044 0.006 -0.066 0.01 c -7.799 1.133 -14.802 5.468 -19.285 12.106 C 5.706 37.913 0 45.358 0 52.952 c 0 3.254 2.647 5.9 5.9 5.9 h 3.451 c 0.969 4.866 5.269 8.545 10.416 8.545 s 9.447 -3.679 10.416 -8.545 h 30.139 c 0.969 4.866 5.27 8.545 10.416 8.545 s 9.446 -3.679 10.415 -8.545 H 84.1 c 3.254 0 5.9 -2.646 5.9 -5.9 C 90 44.441 83.894 37.331 75.479 36.045 z M 43.269 26.602 c 7.065 0 13.848 2.949 18.676 8.094 H 39.464 l -3.267 -8.068 c 0.275 -0.009 0.55 -0.026 0.826 -0.026 H 43.269 z M 32.08 27.118 l 3.068 7.578 H 18.972 C 22.429 30.813 27.018 28.169 32.08 27.118 z M 19.767 63.397 c -3.652 0 -6.623 -2.971 -6.623 -6.622 c 0 -3.652 2.971 -6.623 6.623 -6.623 s 6.623 2.971 6.623 6.623 C 26.39 60.427 23.419 63.397 19.767 63.397 z M 70.738 63.397 c -3.652 0 -6.623 -2.971 -6.623 -6.622 c 0 -3.652 2.971 -6.623 6.623 -6.623 c 3.651 0 6.622 2.971 6.622 6.623 C 77.36 60.427 74.39 63.397 70.738 63.397 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill:${color}); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+    <path d="M 75.479 36.045 l -7.987 -1.22 l -2.35 -2.574 c -5.599 -6.132 -13.571 -9.649 -21.874 -9.649 h -6.245 c -1.357 0 -2.696 0.107 -4.016 0.296 c -0.022 0.004 -0.044 0.006 -0.066 0.01 c -7.799 1.133 -14.802 5.468 -19.285 12.106 C 5.706 37.913 0 45.358 0 52.952 c 0 3.254 2.647 5.9 5.9 5.9 h 3.451 c 0.969 4.866 5.269 8.545 10.416 8.545 s 9.447 -3.679 10.416 -8.545 h 30.139 c 0.969 4.866 5.27 8.545 10.416 8.545 s 9.446 -3.679 10.415 -8.545 H 84.1 c 3.254 0 5.9 -2.646 5.9 -5.9 C 90 44.441 83.894 37.331 75.479 36.045 z M 43.269 26.602 c 7.065 0 13.848 2.949 18.676 8.094 H 39.464 l -3.267 -8.068 c 0.275 -0.009 0.55 -0.026 0.826 -0.026 H 43.269 z M 32.08 27.118 l 3.068 7.578 H 18.972 C 22.429 30.813 27.018 28.169 32.08 27.118 z M 19.767 63.397 c -3.652 0 -6.623 -2.971 -6.623 -6.622 c 0 -3.652 2.971 -6.623 6.623 -6.623 s 6.623 2.971 6.623 6.623 C 26.39 60.427 23.419 63.397 19.767 63.397 z M 70.738 63.397 c -3.652 0 -6.623 -2.971 -6.623 -6.622 c 0 -3.652 2.971 -6.623 6.623 -6.623 c 3.651 0 6.622 2.971 6.622 6.623 C 77.36 60.427 74.39 63.397 70.738 63.397 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill:${color}; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
   </g>
   </svg>
 `;
 
 const renderCar = ({
   id, name, color, isEngineStarted,
-}: CarInfo) => `
+}) => `
   <div class="general-buttons">
   <button class="button select-button" id="select-car-${id}">Select</button>
   <button class="button remove-button" id="remove-car-${id}">Remove</button>
@@ -31,8 +32,8 @@ const renderCar = ({
   <div class="road">
   <div class="launch-pad">
     <div class="color-panel">
-      <button class="icon start-engine-button" id="start-engine-car-${id} ${isEngineStarted ? 'disabled' : ''}">A</button>
-      <button class="icon stop-engine-button" id="stop-engine-car-${id} ${isEngineStarted ? 'disabled' : ''}">B</button>
+      <button class="icon start-engine-button" id="start-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>A</button>
+      <button class="icon stop-engine-button" id="stop-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>B</button>
     </div>
     <div class="car" id="car-${id}">
       ${getCarImage(color)}
@@ -52,7 +53,7 @@ const renderGarage = () => `
   </ul>
 `;
 
-const sorter = { byWins: 'wins', byTime: 'time' }
+const sorter = { byWins: 'wins', byTime: 'time' };
 
 // eslint-disable-next-line no-return-assign
 const renderWinners = () => `
@@ -70,7 +71,7 @@ const renderWinners = () => `
       ${store.winners.map((winner, index) => `
         <tr>
           <td>${index + 1}</td>
-          <td>${renderCarImage(winner.car.color)}</td>
+          <td>${getCarImage(winner.car.color)}</td>
           <td>${winner.car.name}</td>
           <td>${winner.wins}</td>
           <td>${winner.time}</td>
@@ -82,7 +83,7 @@ const renderWinners = () => `
 
 export const render = async () => {
   const html = `
-      <div class="menu">
+    <div class="menu">
       <button class="button garage-menu-button primary" id="garage-menu">To Garage</button>
       <button class="button winners-menu-button primary" id="winners-menu">To Winners</button>
     </div>
@@ -115,8 +116,8 @@ export const render = async () => {
       ${renderWinners()}
     </div>
     <div class="pagination">
-      <button class="button primary prev-button" disabled>Prev</button>
-      <button class="button primary next-button" disabled>Next</button>
+      <button class="button primary prev-button" id="prev" disabled>Prev</button>
+      <button class="button primary next-button" id="next" disabled>Next</button>
     </div>
   `;
   const root = document.createElement('div');
@@ -132,14 +133,14 @@ export const updateStateGarage = async () => {
   store.carsCount = count;
 
   if (store.carsPage * MAX_CARS_PER_PAGE < Number(store.carsCount)) {
-    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('next'))).disabled = false;
   } else {
-    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
+    document.getElementById('next').disabled = false;
   }
   if (store.carsPage > 1) {
-    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('prev'))).disabled = false;
   } else {
-    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('prev'))).disabled = false;
   }
 };
 
@@ -152,19 +153,20 @@ export const updateStateWinners = async () => {
   store.winnersCount = count;
 
   if (store.winnersPage * MAX_ITEM_PER_PAGE < Number(store.winnersCount)) {
-    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('next'))).disabled = false;
   } else {
-    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('next'))).disabled = false;
   }
   if (store.winnersPage > 1) {
-    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('prev'))).disabled = false;
   } else {
-    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
+    ((document.getElementById('prev'))).disabled = false;
   }
 };
 
-const startDriving = async (id: number) => {
-  const startButton = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
+const startDriving = async (id) => {
+  const startButton = document.getElementById(`start-engine-car-${id}`);
+  console.log(startButton);
   startButton.disabled = true;
   startButton.classList.toggle('enabling', true);
 
@@ -172,15 +174,16 @@ const startDriving = async (id: number) => {
   const time = Math.round(distance / velocity);
 
   startButton.classList.toggle('enabling', false);
-  (document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement).disabled = false;
+  (document.getElementById(`stop-engine-car-${id}`)).disabled = false;
 
-  const car = document.getElementById(`car-${id}`) as HTMLElement;
-  const flag = document.getElementById(`flag-${id}`) as HTMLElement;
+  const car = document.getElementById(`car-${id}`);
+  const flag = document.getElementById(`flag-${id}`);
   const htmlDistance = Math.floor(getDistanceBetweenElements(car, flag)) + 100;
 
   store.animation[id] = animation(car, htmlDistance, time);
 
   const { success } = await drive(id);
+  console.log(success);
 
   if (!success) window.cancelAnimationFrame(store.animation[id].id);
 
@@ -188,7 +191,8 @@ const startDriving = async (id: number) => {
 };
 
 const stopDriving = async (id) => {
-  const stopButton = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
+  const stopButton = document.getElementById(`stop-engine-car-${id}`);
+  console.log(stopButton);
   stopButton.disabled = true;
   stopButton.classList.toggle('enabling', true);
   await stopEngine(id);
@@ -197,9 +201,9 @@ const stopDriving = async (id) => {
   // const time = Math.round(distance / velocity);
 
   stopButton.classList.toggle('enabling', false);
-  (document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement).disabled = false;
+  (document.getElementById(`start-engine-car-${id}`)).disabled = false;
 
-  const car = document.getElementById(`car-${id}`) as HTMLElement;
+  const car = document.getElementById(`car-${id}`);
   car.style.transform = 'translateX(0)';
 
   if (store.animation[id]) window.cancelAnimationFrame(store.animation[id].id);
@@ -212,10 +216,12 @@ const setSortOrder = async (sortBy) => {
 
 export const listen = () => {
   document.body.addEventListener('click', async (event) => {
-    const target = event.target as HTMLElement;
+    // eslint-disable-next-line prefer-destructuring
+    const target = event.target;
 
     if (target.classList.contains('start-engine-button')) {
       const id = +target.id.split('start-engine-car-')[1];
+      console.log(id);
       startDriving(id);
     }
 
@@ -225,93 +231,96 @@ export const listen = () => {
     }
 
     if (target.classList.contains('select-button')) {
+      // eslint-disable-next-line no-const-assign
       selectedCar = await getCar(Number(target.id.split('select-car-')[1]));
-      (document.getElementById('update-name') as HTMLInputElement).value = selectedCar.name;
-      (document.getElementById('update-color') as HTMLInputElement).value = selectedCar.color;
-      (document.getElementById('update-name') as HTMLInputElement).disabled = false;
-      (document.getElementById('update-color') as HTMLInputElement).disabled = false;
-      (document.getElementById('update-submit') as HTMLInputElement).disabled = false;
+      (document.getElementById('update-name')).value = selectedCar.name;
+      (document.getElementById('update-color')).value = selectedCar.color;
+      (document.getElementById('update-name')).disabled = false;
+      (document.getElementById('update-color')).disabled = false;
+      (document.getElementById('update-submit')).disabled = false;
     }
 
-    if (target.classList.contains('renove-button')) {
+    if (target.classList.contains('remove-button')) {
       const id = +target.id.split('remove-car-')[1];
       await deleteCar(id);
       await deleteWinner(id);
       await updateStateGarage();
-      (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
+      (document.getElementById('garage')).innerHTML = renderGarage();
     }
 
     if (target.classList.contains('generator-button')) {
-      (target as HTMLButtonElement).disabled = true;
+      (target).disabled = true;
       const cars = generateRandomCars();
-      await Promise.all(cars.map(async c => await createCar(c)));
+      await Promise.all(cars.map((c) => createCar(c)));
       await updateStateGarage();
-      (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
-      (target as HTMLButtonElement).disabled = false;
+      (document.getElementById('garage')).innerHTML = renderGarage();
+      (target).disabled = false;
     }
 
     if (target.classList.contains('race-button')) {
-      (target as HTMLButtonElement).disabled = true;
+      (target).disabled = true;
       const winner = await race(startDriving);
       await saveWinner(winner);
-      const message = document.getElementById('message') as HTMLElement;
+      const message = document.getElementById('message');
       message.innerHTML = `${winner.name} went first ${winner.time}s.`;
       message.classList.toggle('visible', true);
-      (document.getElementById('reset') as HTMLButtonElement).disabled = false;
+      (document.getElementById('reset')).disabled = false;
     }
 
     if (target.classList.contains('reset-button')) {
-      (target as HTMLButtonElement).disabled = true;
+      (target).disabled = true;
       store.cars.map(({ id }) => stopDriving(id));
-      const message = document.getElementById('message') as HTMLElement;
+      const message = document.getElementById('message');
       message.classList.toggle('visible', false);
-      (document.getElementById('race') as HTMLButtonElement).disabled = false;
+      (document.getElementById('race')).disabled = false;
     }
 
     if (target.classList.contains('prev-button')) {
+      // eslint-disable-next-line default-case
       switch (store.view) {
         case 'garage': {
           store.carsPage -= 1;
           await updateStateGarage();
-          (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
+          (document.getElementById('garage')).innerHTML = renderGarage();
           break;
         }
         case 'winner': {
           store.winnersPage -= 1;
           await updateStateWinners;
-          (document.getElementById('winner-view') as HTMLElement).innerHTML = renderWinners();
+          (document.getElementById('winner-view')).innerHTML = renderWinners();
           break;
         }
       }
     }
 
     if (target.classList.contains('next-button')) {
+      // eslint-disable-next-line default-case
       switch (store.view) {
         case 'garage': {
           store.carsPage += 1;
           await updateStateGarage();
-          (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
+          (document.getElementById('garage')).innerHTML = renderGarage();
           break;
         }
         case 'winner': {
           store.winnersPage += 1;
           await updateStateWinners;
-          (document.getElementById('winner-view') as HTMLElement).innerHTML = renderWinners();
+          (document.getElementById('winner-view')).innerHTML = renderWinners();
           break;
         }
       }
     }
 
     if (target.classList.contains('garage-menu-button')) {
-      (document.getElementById('garage-view') as HTMLElement).style.display = 'block';
-      (document.getElementById('garage-view') as HTMLElement).style.display = 'none';
+      (document.getElementById('garage-view')).style.display = 'block';
+      (document.getElementById('winners-view')).style.display = 'none';
     }
 
-    if (target.classList.contains('winner-menu-button')) {
-      (document.getElementById('garage-view') as HTMLElement).style.display = 'none';
-      (document.getElementById('garage-view') as HTMLElement).style.display = 'block';
+    if (target.classList.contains('winners-menu-button')) {
+      (document.getElementById('garage-view')).style.display = 'none';
+      (document.getElementById('winners-view')).style.display = 'block';
       await updateStateWinners();
-      (document.getElementById('winners-view') as HTMLElement).innerHTML = renderWinners();
+      (document.getElementById('winners-view')).innerHTML = renderWinners();
     }
 
     if (target.classList.contains('table-wins')) {
@@ -323,29 +332,30 @@ export const listen = () => {
     }
   });
 
-  (document.getElementById('create') as HTMLButtonElement).addEventListener('submit', async (event) => {
+  (document.getElementById('create')).addEventListener('submit', async (event) => {
     event.preventDefault();
     // eslint-disable-next-line max-len
     const car = Object.fromEntries(new Map([...event.target].filter(({ name }) => !!name).map(({ value, name }) => [name, value]))); // 50.09
     await createCar(car);
     await updateStateGarage();
-    (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
-    (document.getElementById('create-name') as HTMLInputElement).value = '';
-    event.target.disabled = true; //target
+    (document.getElementById('garage')).innerHTML = renderGarage();
+    (document.getElementById('create-name')).value = '';
+    // eslint-disable-next-line no-param-reassign
+    event.target.disabled = true;
   });
 
-  (document.getElementById('update') as HTMLButtonElement).addEventListener('submit', async (event) => {
+  (document.getElementById('update')).addEventListener('submit', async (event) => {
     event.preventDefault();
     // eslint-disable-next-line max-len
     const car = Object.fromEntries(new Map([...event.target].filter(({ name }) => !!name).map(({ value, name }) => [name, value]))); // !!!!!!
     await updateCar(selectedCar.id, car);
     await updateStateGarage();
-    (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
-    (document.getElementById('update-name') as HTMLInputElement).value = '';
-    (document.getElementById('update-name') as HTMLInputElement).disabled = true;
-    (document.getElementById('update-color') as HTMLInputElement).disabled = true;
-    (document.getElementById('update-submit') as HTMLInputElement).disabled = true;
-    (document.getElementById('update-color') as HTMLInputElement).value = '#ffffff';
+    (document.getElementById('garage')).innerHTML = renderGarage();
+    (document.getElementById('update-name')).value = '';
+    (document.getElementById('update-name')).disabled = true;
+    (document.getElementById('update-color')).disabled = true;
+    (document.getElementById('update-submit')).disabled = true;
+    (document.getElementById('update-color')).value = '#ffffff';
     selectedCar = null;
-  })
+  });
 };

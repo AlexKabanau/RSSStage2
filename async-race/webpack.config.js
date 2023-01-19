@@ -10,11 +10,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = {
   entry: ['./src/index', './src/sass/style.scss'],
+  experiments: {
+    topLevelAwait: true,
+  },
+  // module.exports = {
+  //   webpack: {
+  //     configure: {
+  //       experiments: {
+  //         topLevelAwait: true,
+  //       },
+  //     },
+  //   },
+  // },
   // entry: path.resolve(__dirname, "./src/index"),
   mode: 'development',
   module: {
     rules: [
-      { test: /\.ts$/i, use: 'ts-loader' },
+      // { test: /\.ts$/i, use: 'ts-loader' },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
