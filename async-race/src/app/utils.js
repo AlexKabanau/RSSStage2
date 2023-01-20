@@ -43,10 +43,11 @@ export const raceAll = async (promises, ids) => {
   const { success, id, time } = await Promise.race(promises);
 
   if (!success) {
-    // const failedIndex = ids.failedIndex((i) => i === id);
+    const failedIndex = ids.findIndex((i) => i === id);
     // eslint-disable-next-line max-len, max-len
-    // const restPromises = [...promises.slice(0, failedIndex), ...promises.slice(failedIndex + 1, promises.length)];
-    // const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
+    const restPromises = [...promises.slice(0, failedIndex), ...promises.slice(failedIndex + 1, promises.length)];
+    const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
+    return raceAll(restPromises, restIds);
   }
 
   return { ...store.cars.find((car) => car.id === id), time: +(time / 1000).toFixed(2) };
@@ -81,5 +82,4 @@ const getRandomColor = () => {
 
 export const generateRandomCars = (count = 100) =>
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, implicit-arrow-linebreak
-  new Array(count).fill(1).map((el) => ({ name: getRandomName(), color: getRandomColor() }))
-;
+  new Array(count).fill(1).map((el) => ({ name: getRandomName(), color: getRandomColor() }));

@@ -1,16 +1,14 @@
 import {
   // eslint-disable-next-line max-len
-  getCar, getCars, createCar, deleteCar, updateCar, startEngine, stopEngine, saveWinner, getWinners, deleteWinner, drive,
+  getCars, startEngine, stopEngine, getWinners, drive,
 } from './api';
 import store from './store';
 import {
-  animation, getDistanceBetweenElements, race, generateRandomCars,
+  animation, getDistanceBetweenElements,
 } from './utils';
 // import { CarInfo } from '../../core/types/index';
 
-let selectedCar = null;
-
-const getCarImage = (color) => `
+export const getCarImage = (color) => `
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
 
   <defs>
@@ -32,8 +30,8 @@ const renderCar = ({
   <div class="road">
   <div class="launch-pad">
     <div class="color-panel">
-      <button class="icon start-engine-button" id="start-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>A</button>
-      <button class="icon stop-engine-button" id="stop-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>B</button>
+      <button class="icon start-engine-button" id="start-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>Start</button>
+      <button class="icon stop-engine-button" id="stop-engine-car-${id}" ${isEngineStarted ? 'disabled' : ''}>Return/stop</button>
     </div>
     <div class="car" id="car-${id}">
       ${getCarImage(color)}
@@ -43,7 +41,7 @@ const renderCar = ({
   </div>
 `;
 
-const renderGarage = () => `
+export const renderGarage = () => `
   <h1>Garage (${store.carsCount})</h1>
   <h2>Page #${store.carsPage}</h2>
   <ul class="garage">
@@ -56,7 +54,7 @@ const renderGarage = () => `
 const sorter = { byWins: 'wins', byTime: 'time' };
 
 // eslint-disable-next-line no-return-assign
-const renderWinners = () => `
+export const renderWinners = () => `
   <h1>Winner (${store.winnersCount})</h1>
   <h2>Page #${store.winnersPage}</h2>
   <table class="table" cellspacing="0" border="0" cellpadding="0">
@@ -64,8 +62,8 @@ const renderWinners = () => `
       <th>Number</th>
       <th>Car</th>
       <th>Name</th>
-      <th class="table-button table-wins ${store.sortBy = sorter.byWins ? store.sortOrder : ''}" id="sort-by-wins">Wins</th>
-      <th class="table-button table-time ${store.sortBy = sorter.byTime ? store.sortOrder : ''}" id="sort-by-time">Best time (seconds)</th>
+      <th class="table-button table-wins ${store.sortBy === sorter.byWins ? store.sortOrder : ''}" id="sort-by-wins">Wins</th>
+      <th class="table-button table-time ${store.sortBy === sorter.byTime ? store.sortOrder : ''}" id="sort-by-time">Best time (seconds)</th>
     </thead>
     <tbody>
       ${store.winners.map((winner, index) => `
@@ -167,7 +165,7 @@ export const updateStateWinners = async () => {
   }
 };
 
-const startDriving = async (id) => {
+export const startDriving = async (id) => {
   const startButton = document.getElementById(`start-engine-car-${id}`);
   console.log(startButton);
   startButton.disabled = true;
@@ -193,7 +191,7 @@ const startDriving = async (id) => {
   return { success, id, time };
 };
 
-const stopDriving = async (id) => {
+export const stopDriving = async (id) => {
   const stopButton = document.getElementById(`stop-engine-car-${id}`);
   console.log(stopButton);
   stopButton.disabled = true;
@@ -212,161 +210,7 @@ const stopDriving = async (id) => {
   if (store.animation[id]) window.cancelAnimationFrame(store.animation[id].id);
 };
 
-const setSortOrder = async (sortBy) => {
+export const setSortOrder = async (sortBy) => {
   store.sortOrder = store.sortOrder === 'asc' ? 'desc' : 'asc';
   store.sortBy = sortBy;
-};
-
-export const listen = () => {
-  document.body.addEventListener('click', async (event) => {
-    // eslint-disable-next-line prefer-destructuring
-    const target = event.target;
-
-    if (target.classList.contains('start-engine-button')) {
-      const id = +target.id.split('start-engine-car-')[1];
-      console.log(id);
-      startDriving(id);
-    }
-
-    if (target.classList.contains('stop-engine-button')) {
-      const id = +target.id.split('stop-engine-car-')[1];
-      stopDriving(id);
-    }
-
-    if (target.classList.contains('select-button')) {
-      // eslint-disable-next-line no-const-assign
-      selectedCar = await getCar(Number(target.id.split('select-car-')[1]));
-      (document.getElementById('update-name')).value = selectedCar.name;
-      (document.getElementById('update-color')).value = selectedCar.color;
-      (document.getElementById('update-name')).disabled = false;
-      (document.getElementById('update-color')).disabled = false;
-      (document.getElementById('update-submit')).disabled = false;
-    }
-
-    if (target.classList.contains('remove-button')) {
-      const id = +target.id.split('remove-car-')[1];
-      await deleteCar(id);
-      await deleteWinner(id);
-      await updateStateGarage();
-      (document.getElementById('garage')).innerHTML = renderGarage();
-    }
-
-    if (target.classList.contains('generator-button')) {
-      (target).disabled = true;
-      const cars = generateRandomCars();
-      console.log(cars);
-      await Promise.all(cars.map((c) => createCar(c)));
-      await updateStateGarage();
-      (document.getElementById('garage')).innerHTML = renderGarage();
-      (target).disabled = false;
-    }
-
-    if (target.classList.contains('race-button')) {
-      (target).disabled = true;
-      const winner = await race(startDriving);
-      await saveWinner(winner);
-      const message = document.getElementById('message');
-      message.innerHTML = `${winner.name} went first ${winner.time}s.`;
-      message.classList.toggle('visible', true);
-      (document.getElementById('reset')).disabled = false;
-    }
-
-    if (target.classList.contains('reset-button')) {
-      (target).disabled = true;
-      store.cars.map(({ id }) => stopDriving(id));
-      const message = document.getElementById('message');
-      message.classList.toggle('visible', false);
-      (document.getElementById('race')).disabled = false;
-    }
-
-    if (target.classList.contains('prev-button')) {
-      // eslint-disable-next-line default-case
-      switch (store.view) {
-        case 'garage': {
-          store.carsPage -= 1;
-          await updateStateGarage();
-          (document.getElementById('garage')).innerHTML = renderGarage();
-          break;
-        }
-        case 'winner': {
-          store.winnersPage -= 1;
-          await updateStateWinners();
-          (document.getElementById('winners-view')).innerHTML = renderWinners();
-          break;
-        }
-      }
-    }
-
-    if (target.classList.contains('next-button')) {
-      console.log(store.view);
-      // eslint-disable-next-line default-case
-      switch (store.view) {
-        case 'garage': {
-          store.carsPage += 1;
-          await updateStateGarage();
-          (document.getElementById('garage')).innerHTML = renderGarage();
-          break;
-        }
-        case 'winner': {
-          store.winnersPage += 1;
-          await updateStateWinners();
-          (document.getElementById('winners-view')).innerHTML = renderWinners();
-          break;
-        }
-      }
-    }
-
-    if (target.classList.contains('garage-menu-button')) {
-      (document.getElementById('garage-view')).style.display = 'block';
-      store.view = 'garage';
-      (document.getElementById('winners-view')).style.display = 'none';
-    }
-
-    if (target.classList.contains('winners-menu-button')) {
-      (document.getElementById('garage-view')).style.display = 'none';
-      (document.getElementById('winners-view')).style.display = 'block';
-      store.view = 'winner';
-      await updateStateWinners();
-      (document.getElementById('winners-view')).innerHTML = renderWinners();
-    }
-
-    if (target.classList.contains('table-wins')) {
-      setSortOrder('wins');
-      await updateStateWinners();
-      (document.getElementById('winners-view')).innerHTML = renderWinners();
-    }
-
-    if (target.classList.contains('table-time')) {
-      setSortOrder('time');
-      await updateStateWinners();
-      (document.getElementById('winners-view')).innerHTML = renderWinners();
-    }
-  });
-
-  (document.getElementById('create')).addEventListener('submit', async (event) => {
-    event.preventDefault();
-    // eslint-disable-next-line max-len
-    const car = Object.fromEntries(new Map([...event.target].filter(({ name }) => !!name).map(({ value, name }) => [name, value]))); // 50.09
-    await createCar(car);
-    await updateStateGarage();
-    (document.getElementById('garage')).innerHTML = renderGarage();
-    (document.getElementById('create-name')).value = '';
-    // eslint-disable-next-line no-param-reassign
-    event.target.disabled = true;
-  });
-
-  (document.getElementById('update')).addEventListener('submit', async (event) => {
-    event.preventDefault();
-    // eslint-disable-next-line max-len
-    const car = Object.fromEntries(new Map([...event.target].filter(({ name }) => !!name).map(({ value, name }) => [name, value]))); // !!!!!!
-    await updateCar(selectedCar.id, car);
-    await updateStateGarage();
-    (document.getElementById('garage')).innerHTML = renderGarage();
-    (document.getElementById('update-name')).value = '';
-    (document.getElementById('update-name')).disabled = true;
-    (document.getElementById('update-color')).disabled = true;
-    (document.getElementById('update-submit')).disabled = true;
-    (document.getElementById('update-color')).value = '#ffffff';
-    selectedCar = null;
-  });
 };
