@@ -26,7 +26,7 @@ const baseConfig = {
   mode: 'development',
   module: {
     rules: [
-      // { test: /\.ts$/i, use: 'ts-loader' },
+      { test: /\.ts$/i, use: 'ts-loader' },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
