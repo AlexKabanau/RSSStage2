@@ -1,9 +1,12 @@
 //constants
-// @import "abstract/constatnts";
+@import "abstract/constatnts";
+@import "abstract/mixins";
+@import "abstract/placeholders";
+
 
 // //fonts
-// @import "fonts/fonts";
+@import "fonts/fonts";
 
-// @import "base/base";
+@import "base/base";
 
 @import "layouts/async";

@@ -22,7 +22,7 @@ const listen = () => {
 
     if (target.classList.contains('start-engine-button')) {
       const id = +target.id.split('start-engine-car-')[1];
-      console.log(id);
+      // console.log(id);
       startDriving(id);
     }
 
@@ -52,7 +52,7 @@ const listen = () => {
     if (target.classList.contains('generator-button')) {
       (target as HTMLButtonElement).disabled = true;
       const cars = generateRandomCars();
-      console.log(cars);
+      // console.log(cars);
       await Promise.all(cars.map((c) => createCar(c)));
       await updateStateGarage();
       (document.getElementById('garage') as HTMLElement).innerHTML = renderGarage();
@@ -96,7 +96,7 @@ const listen = () => {
     }
 
     if (target.classList.contains('next-button')) {
-      console.log(store.view);
+      // console.log(store.view);
       // eslint-disable-next-line default-case
       switch (store.view) {
         case 'garage': {

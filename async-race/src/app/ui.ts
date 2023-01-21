@@ -154,8 +154,8 @@ export const updateStateWinners = async () => {
   });
   store.winners = items;
   store.winnersCount = Number(count);
-  console.log(store.winnersPage);
-  console.log(store.winnersCount);
+  // console.log(store.winnersPage);
+  // console.log(store.winnersCount);
 
   if (store.winnersPage * MAX_ITEM_PER_PAGE < Number(store.winnersCount)) {
     ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
@@ -188,7 +188,7 @@ export const startDriving = async (id: number): Promise<RaceDone> => {
   store.animation[id] = animation(car, htmlDistance, time);
 
   const { success } = await drive(id);
-  console.log(success);
+  // console.log(success);
 
   if (!success) window.cancelAnimationFrame(store.animation[id].id);
 
@@ -197,7 +197,7 @@ export const startDriving = async (id: number): Promise<RaceDone> => {
 
 export const stopDriving = async (id: number) => {
   const stopButton = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
-  console.log(stopButton);
+  // console.log(stopButton);
   stopButton.disabled = true;
   stopButton.classList.toggle('enabling', true);
   await stopEngine(id);
