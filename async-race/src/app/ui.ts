@@ -2,13 +2,15 @@ import {
   // eslint-disable-next-line max-len
   getCars, startEngine, stopEngine, getWinners, drive,
 } from './api';
+// import store from './store';
 import store from './store';
 import {
   animation, getDistanceBetweenElements,
 } from './utils';
 // import { CarInfo } from '../../core/types/index';
+import { RaceDone, RenderCar } from './types';
 
-export const getCarImage = (color) => `
+export const getCarImage = (color: string) => `
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
 
   <defs>
@@ -21,7 +23,7 @@ export const getCarImage = (color) => `
 
 const renderCar = ({
   id, name, color, isEngineStarted,
-}) => `
+}: RenderCar) => `
   <div class="general-buttons">
   <button class="button select-button" id="select-car-${id}">Select</button>
   <button class="button remove-button" id="remove-car-${id}">Remove</button>
@@ -132,14 +134,14 @@ export const updateStateGarage = async () => {
 
   if (store.carsPage * MAX_CARS_PER_PAGE < Number(store.carsCount)) {
     // console.log(store.carsPage);
-    ((document.getElementById('next'))).disabled = false;
+    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
   } else {
-    document.getElementById('next').disabled = true;
+    ((document.getElementById('next')) as HTMLButtonElement).disabled = true;
   }
   if (store.carsPage > 1) {
-    ((document.getElementById('prev'))).disabled = false;
+    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
   } else {
-    ((document.getElementById('prev'))).disabled = true;
+    ((document.getElementById('prev')) as HTMLButtonElement).disabled = true;
   }
 };
 
@@ -147,27 +149,29 @@ const MAX_ITEM_PER_PAGE = 10;
 
 export const updateStateWinners = async () => {
   // eslint-disable-next-line max-len
-  const { items, count } = await getWinners({ page: store.winnersPage, sort: store.sortBy, order: store.sortOrder });
+  const { items, count } = await getWinners({
+    page: store.winnersPage, limit: MAX_CARS_PER_PAGE, sort: store.sortBy, order: store.sortOrder,
+  });
   store.winners = items;
-  store.winnersCount = count;
+  store.winnersCount = Number(count);
   console.log(store.winnersPage);
   console.log(store.winnersCount);
 
   if (store.winnersPage * MAX_ITEM_PER_PAGE < Number(store.winnersCount)) {
-    ((document.getElementById('next'))).disabled = false;
+    ((document.getElementById('next')) as HTMLButtonElement).disabled = false;
   } else {
-    ((document.getElementById('next'))).disabled = true;
+    ((document.getElementById('next')) as HTMLButtonElement).disabled = true;
   }
   if (store.winnersPage > 1) {
-    ((document.getElementById('prev'))).disabled = false;
+    ((document.getElementById('prev')) as HTMLButtonElement).disabled = false;
   } else {
-    ((document.getElementById('prev'))).disabled = true;
+    ((document.getElementById('prev')) as HTMLButtonElement).disabled = true;
   }
 };
 
-export const startDriving = async (id) => {
-  const startButton = document.getElementById(`start-engine-car-${id}`);
-  console.log(startButton);
+export const startDriving = async (id: number): Promise<RaceDone> => {
+  const startButton = document.getElementById(`start-engine-car-${id}`) as HTMLButtonElement;
+  // console.log(startButton);
   startButton.disabled = true;
   startButton.classList.toggle('enabling', true);
 
@@ -175,10 +179,10 @@ export const startDriving = async (id) => {
   const time = Math.round(distance / velocity);
 
   startButton.classList.toggle('enabling', false);
-  (document.getElementById(`stop-engine-car-${id}`)).disabled = false;
+  ((document.getElementById(`stop-engine-car-${id}`)) as HTMLButtonElement).disabled = false;
 
-  const car = document.getElementById(`car-${id}`);
-  const flag = document.getElementById(`flag-${id}`);
+  const car = document.getElementById(`car-${id}`) as HTMLElement;
+  const flag = document.getElementById(`flag-${id}`) as HTMLElement;
   const htmlDistance = Math.floor(getDistanceBetweenElements(car, flag)) + 100;
 
   store.animation[id] = animation(car, htmlDistance, time);
@@ -191,8 +195,8 @@ export const startDriving = async (id) => {
   return { success, id, time };
 };
 
-export const stopDriving = async (id) => {
-  const stopButton = document.getElementById(`stop-engine-car-${id}`);
+export const stopDriving = async (id: number) => {
+  const stopButton = document.getElementById(`stop-engine-car-${id}`) as HTMLButtonElement;
   console.log(stopButton);
   stopButton.disabled = true;
   stopButton.classList.toggle('enabling', true);
@@ -202,15 +206,15 @@ export const stopDriving = async (id) => {
   // const time = Math.round(distance / velocity);
 
   stopButton.classList.toggle('enabling', false);
-  (document.getElementById(`start-engine-car-${id}`)).disabled = false;
+  ((document.getElementById(`start-engine-car-${id}`)) as HTMLButtonElement).disabled = false;
 
-  const car = document.getElementById(`car-${id}`);
+  const car = document.getElementById(`car-${id}`) as HTMLElement;
   car.style.transform = 'translateX(0)';
 
   if (store.animation[id]) window.cancelAnimationFrame(store.animation[id].id);
 };
 
-export const setSortOrder = async (sortBy) => {
+export const setSortOrder = async (sortBy: string) => {
   store.sortOrder = store.sortOrder === 'asc' ? 'desc' : 'asc';
   store.sortBy = sortBy;
 };

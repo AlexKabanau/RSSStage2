@@ -1,5 +1,5 @@
 import {
-  Car, GETCAR, STARTENGINE, DRIVE, WinnerItem, WinnersItems, SaveWinner,
+  Car, GETCAR, STARTENGINE, DRIVE, WinnerItem, WinnersItems, SaveWinner, CreateCar,
 } from './types';
 
 const base = 'http://127.0.0.1:3000';
@@ -18,11 +18,11 @@ export const getCars = async (page: number, limit = 7) => {
   return obj;
 };
 
-export const getCar = async (id: number): Promise<string> => (
+export const getCar = async (id: number): Promise<Car> => (
   await fetch(`${garage}/${id}`)
 ).json();
 
-export const createCar = async (body: string): Promise<Car> => (
+export const createCar = async (body: CreateCar): Promise<Car> => (
   await fetch(`${garage}`, {
     method: 'POST',
     body: JSON.stringify(body),
@@ -35,7 +35,7 @@ export const deleteCar = async (id: number): Promise<Car> => (
   await fetch(`${garage}/${id}`, { method: 'DELETE' })
 ).json();
 
-export const updateCar = async (id: number, body: string): Promise<Car> => (
+export const updateCar = async (id: number, body: CreateCar): Promise<Car> => (
   await fetch(`${garage}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(body),
@@ -52,7 +52,7 @@ export const stopEngine = async (id: number): Promise<STARTENGINE> => (
   await fetch(`${engine}?id=${id}&status=stopped`, { method: 'PATCH' })
 ).json();
 
-export const drive = async (id: number): Promise<string | DRIVE> => {
+export const drive = async (id: number): Promise<DRIVE> => {
   const res = await fetch(`${engine}?id=${id}&status=drive`, { method: 'PATCH' }).catch();
   return res.status !== 200 ? { success: false } : { ...(await res.json()) };
 };

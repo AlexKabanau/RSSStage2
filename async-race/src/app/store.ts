@@ -1,17 +1,20 @@
-import { getCars, getWinners } from './api';
+import { getCars } from './api';
+import { StoreObj } from './types';
+// import { AnimationItem } from './types';
 
 const { items: cars, count: carsCount } = await getCars(1);
-const { items: winners, count: winnersCount } = await getWinners({
-  page: 1, limit: 10, sort: '', order: '',
-});
+// const { items: winners, count: winnersCount } = await getWinners({
+//   page: 1, limit: 10, sort: '', order: '',
+// });
 
-export default {
+// eslint-disable-next-line import/prefer-default-export
+const store: StoreObj = {
   carsPage: 1,
   cars,
   carsCount,
   winnersPage: 1,
-  winners,
-  winnersCount,
+  winners: [],
+  winnersCount: 0,
   animation: {},
   view: 'garage',
   sortBy: '',
@@ -19,3 +22,4 @@ export default {
   // sortBy: null,
   // sortOrder: null,
 };
+export default store;

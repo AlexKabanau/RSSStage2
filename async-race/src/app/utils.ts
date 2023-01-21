@@ -1,6 +1,11 @@
+/* eslint-disable max-len */
 import store from './store';
+import {
+  AnimationItem, NewWinner, RaceDone, RaceWinner,
+} from './types';
+// import { AnimationItem, RaceDone, Winner } from './types';
 
-function getPositionAtCenter(element) {
+function getPositionAtCenter(element: HTMLElement) {
   const {
     top, left, width, height,
   } = element.getBoundingClientRect();
@@ -11,21 +16,20 @@ function getPositionAtCenter(element) {
   };
 }
 
-export function getDistanceBetweenElements(a, b) {
+export function getDistanceBetweenElements(a: HTMLElement, b: HTMLElement) {
   const aPosition = getPositionAtCenter(a);
   const bPosition = getPositionAtCenter(b);
 
   return Math.hypot(aPosition.x - bPosition.x, aPosition.y - bPosition.y);
 }
 
-export function animation(car, distance, animationTime) {
-  let start = null;
-  const state = {};
-
-  function step(timestamp) {
-    if (!start) start = timestamp;
-    const time = timestamp - start;
-    const passed = Math.round(time * (distance / animationTime));
+export function animation(car: HTMLElement, distance: number, animationTime: number) {
+  // let start: number | null = null;
+  const state: AnimationItem = {};
+  const startTime = new Date().getTime();
+  function step() {
+    const currentTime = new Date().getTime();
+    const passed = Math.round((currentTime - startTime)) * (distance / animationTime);
 
     // eslint-disable-next-line no-param-reassign
     car.style.transform = `translateX(${Math.min(passed, distance)}px)`;
@@ -39,24 +43,25 @@ export function animation(car, distance, animationTime) {
   return state;
 }
 
-export const raceAll = async (promises, ids) => {
+// eslint-disable-next-line max-len
+const raceAll = async (promises: Array<Promise<RaceDone>>, ids: Array<number>): Promise<RaceWinner | null> => {
   const { success, id, time } = await Promise.race(promises);
 
   if (!success) {
     const failedIndex = ids.findIndex((i) => i === id);
-    // eslint-disable-next-line max-len, max-len
-    const restPromises = [...promises.slice(0, failedIndex), ...promises.slice(failedIndex + 1, promises.length)];
-    const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
-    return raceAll(restPromises, restIds);
+    promises.splice(failedIndex, 1);
+    ids.splice(failedIndex, 1);
+    if (promises.length < 1) return null;
+    return raceAll(promises, ids);
   }
 
   return { ...store.cars.find((car) => car.id === id), time: +(time / 1000).toFixed(2) };
 };
 
-export const race = async (action) => {
+export const race = async (action: (id: number) => Promise<RaceDone>) => {
   const promises = store.cars.map(({ id }) => action(id));
 
-  const winner = await raceAll(promises, store.cars.map((car) => car.id));
+  const winner = await raceAll(promises, store.cars.map((car) => car.id)) as NewWinner;
 
   return winner;
 };
