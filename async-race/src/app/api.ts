@@ -58,7 +58,7 @@ export const drive = async (id: number): Promise<string | DRIVE> => {
 };
 
 const getSortOrder = (sort: string, order: string): string => {
-  if (sort && order) {
+  if (sort !== '' && order !== '') {
     return `&_sort=${sort}&_order=${order}`;
   }
   return '';
